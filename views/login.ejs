@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>CMPE-273</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Login and Registration Form for CMPE273" />
+        <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+    </head>
+    <body>
+        <div class="container">
+        <header>
+            <h1>SJSU</h1>
+        </header>
+        <section> 
+            <div id="container_login" >
+            <a class="hiddenanchor" id="toregister"></a>
+            <a class="hiddenanchor" id="tologin"></a>
+            <div id="wrapper">
+                <div id="login" class="animate form">
+                    <form  action="/login" autocomplete="on" method="POST"> 
+                        <h1>Log in</h1> 
+                        <p> 
+                            <label for="username" class="uname" data-icon="&#xe971" > Your email or username </label>
+                            <input id="username" name="username" required="required" type="text" placeholder="username or email" autofocus/>
+                        </p>
+                        <p> 
+                            <label for="password" class="youpasswd" data-icon="&#xe98d"> Your password </label>
+                            <input id="password" name="password" required="required" type="password" placeholder="password" autofocus/> 
+                        </p>
+                        <p class="keeplogin"> 
+                            <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
+                            <label for="loginkeeping">Keep me logged in</label>
+                        </p>
+                        <p class="login button"> 
+                            <input type="submit" value="Login" /> 
+                        </p>
+                        <p class="change_link">
+                            Not a member yet ?
+                            <a href="/#toregister" class="to_register">Join us</a>
+                        </p>
+                    </form>
+                    <% if (error && error.length > 0) { %>
+                        <div class="alert alert-danger" style="color: red; text-align: center;" ><%= error %></div>
+                    <% } %>
+                </div>
+                <div id="register" class="animate form">
+                    <form  action="/signup" autocomplete="on" method="POST"> 
+                        <h1> Sign up </h1> 
+                        <p> 
+                            <label for="usernamesignup" class="uname" data-icon="&#xe971">Your username</label>
+                            <input id="usernamesignup" name="Users[username]" required="required" type="text" placeholder="username" autofocus/>
+                        </p>
+                        <p> 
+                            <label for="emailsignup" class="youmail" data-icon="&#xe945" > Your email</label>
+                            <input id="emailsignup" name="Users[email]" required="required" type="email" placeholder="email" autofocus/> 
+                        </p>
+                        <p> 
+                            <label for="passwordsignup" class="youpasswd" data-icon="&#xe98d">Your password </label>
+                            <input id="passwordsignup" name="Users[password]" required="required" type="password" placeholder="password" autofocus/>
+                        </p>
+                        <p> 
+                            <label for="passwordsignup_confirm" class="youpasswd" data-icon="&#xe98d">Please confirm your password </label>
+                            <input id="passwordsignup_confirm" name="confirmpassword" required="required" type="password" placeholder="password" autofocus/>
+                        </p>
+                        <p class="signin button"> 
+                            <input type="submit" value="Sign up"/> 
+                        </p>
+                        <p class="change_link">  
+                            Already a member ?
+                            <a href="#tologin" class="to_register"> Go and log in </a>
+                        </p>
+                    </form>               
+                    <% if (error && error.length > 0) { %>
+                        <div class="alert alert-danger" style="color: red; text-align: center;"><%= error %></div>
+                    <% } %>
+                </div> 
+           </div>  
+        </div>
+    </section>
+    </body>
+</html>

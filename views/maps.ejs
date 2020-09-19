@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Maps</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Login and Registration Form for CMPE273" />
+        <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+  <body>
+    <!-- <button class="btn btn primary" onclick="getLocation()">
+        <h5> <span> Get Location Details</span></h5>
+    </button> -->
+    <div class="col-xs-4">
+      <button class="btn btn primary" onclick="getLocation()">
+        <h5> <span> Get Location Details</span></h5>
+      </button>
+      <div class="float-right">
+      <br>
+      <input name="addressinput" class="form-control" id="addressinput" type="text" placeholder="If unable to fectch location kindly enter your query/address"> </input>
+      <br>
+      <button class="btn btn-primary btn-sm" onclick="addressQuery()">GO</button>
+      </div>
+
+    </div>
+    <p id="location_details"></p>
+        <script>
+            var latlng = document.getElementById("location_details");
+            function getLocation() {
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+              } else { 
+                latlng.innerHTML = "Geolocation is not supported by this browser.";
+              }
+            }
+            function showPosition(position) {
+                geocoder = new google.maps.Geocoder()
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                geocoder.geocode( { 'location': pos} , function(results, status) {
+                    // console.log(results[0].address_components)
+                    for (var i = 0; i < results[0].address_components.length; i++) {
+                    if (results[0]['address_components'][i]['types'][0] === 'locality'){
+                        var city = (results[0]['address_components'][i].long_name)
+                    }
+                    if (results[0]['address_components'][i]['types'][0] === 'administrative_area_level_2'){
+                        var county = (results[0]['address_components'][i].long_name)
+                    }
+                    if (results[0]['address_components'][i]['types'][0] === 'administrative_area_level_1'){
+                        var state = (results[0]['address_components'][i].long_name)
+                    }
+                    if (results[0]['address_components'][i]['types'][0] === "country"){
+                        var country = (results[0]['address_components'][i].long_name)
+                    }
+                    if (results[0]['address_components'][i]['types'][0] === 'postal_code'){
+                        var postal_code = (results[0]['address_components'][i].long_name)
+                    }
+                }
+                    latlng.innerHTML = "City: " + city +
+                    "<br>County: " + county +
+                    "<br>State: " + state +
+                    "<br>Country: " + country +
+                    "<br>Postal Code: " + postal_code +
+                    "<br>Address: " + results[0].formatted_address +
+                    "<br>Latitude: " + pos.lat + 
+                    "<br>Longitude: " + pos.lng
+                    
+                })
+            }
+          </script>
+        <script>
+          function addressQuery() {
+            var address = document.getElementById("addressinput").value;
+            const map = new google.maps.Map(document.getElementById("map"), {
+                  zoom: 16,
+                  center: { lat: 0, lng: 0 }
+                });
+             geocoder = new google.maps.Geocoder()
+             geocoder.geocode( { 'address': address} , function(results, status) {
+              if (status === "OK") {
+                map.setCenter(results[0].geometry.location);
+                new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+              });
+              } else {
+                alert("Geocode was not successful for the following reason: " + status);
+                }
+             })
+             geocoder.geocode( { 'address': address} , function(results, status) {
+                    // console.log(results[0].address_components)
+                    for (var i = 0; i < results[0].address_components.length; i++) {
+                    if (results[0]['address_components'][i]['types'][0] === 'locality'){
+                        var city = (results[0]['address_components'][i].long_name)
+                    }
+                    if (results[0]['address_components'][i]['types'][0] === 'administrative_area_level_2'){
+                        var county = (results[0]['address_components'][i].long_name)
+                    }
+                    if (results[0]['address_components'][i]['types'][0] === 'administrative_area_level_1'){
+                        var state = (results[0]['address_components'][i].long_name)
+                    }
+                    if (results[0]['address_components'][i]['types'][0] === "country"){
+                        var country = (results[0]['address_components'][i].long_name)
+                    }
+                    if (results[0]['address_components'][i]['types'][0] === 'postal_code'){
+                        var postal_code = (results[0]['address_components'][i].long_name)
+                    }
+                }
+                    latlng.innerHTML = "City: " + city +
+                    "<br>County: " + county +
+                    "<br>State: " + state +
+                    "<br>Country: " + country +
+                    "<br>Postal Code: " + postal_code +
+                    "<br>Address: " + results[0].formatted_address //+
+                    // "<br>Latitude: " + pos.lat + 
+                    // "<br>Longitude: " + pos.lng
+                    
+                })
+      }
+        </script>
+    <div id="map"> </div>
+    <script>
+      var map, infoWindow, marker;
+      
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 0, lng: 0},
+          zoom: 16
+        });
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var marker = new google.maps.Marker({
+                position: pos,
+                map: map,
+            });
+            map.setCenter(pos);
+
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow = new google.maps.InfoWindow();
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+    </script>
+
+    <script defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBb6kf0iPAJGUKRKRW8bXU85u4RNuhSja0&callback=initMap">
+    </script>
+  </body>
+</html>

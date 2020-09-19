@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>Welcome To CMPE-273</h1>
+            </header>
+        </div>
+
+        <form action="/logout" method="POST">
+            <div id="lgbtn">
+            <button type="submit" class="btn pull-right">
+                <span class="glyphicon glyphicon-log-out"></span> Log out
+            </button>
+            </div>
+        </form>
+
+        <form action="/maps" method="GET">
+            <br>
+            <br>
+            <div id="gmapbtn">
+            <button type="submit" class="btn btn primary">
+                <h4> <span> View Google Maps</span></h4>
+            </button>
+            </div>
+
+        </form>
+    </body>
+</html>
