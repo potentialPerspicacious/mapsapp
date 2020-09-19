@@ -7,10 +7,10 @@ You may need:
 To install all the dependencies from package.json
  - npm install
 
-Start server by running
+To start server
  - node index.js
 
-Open browser to start the server
+Open browser and go to
  - localhost:8000
 
 CREDENTIALS: 
