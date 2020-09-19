@@ -4,6 +4,9 @@ This readme assumes you have node installed on your local<br />
 
 You may need: 
 
+Add Your Google API key: 
+- ./views/maps.ejs ADD YOUR_GOOGLE_API_KEY IN LINE 172
+
 To install all the dependencies from package.json
  - npm install
 
